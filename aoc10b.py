@@ -6,7 +6,7 @@ def main():
     lenghts = [ord(x) for x in raw_input] + [17, 31, 73, 47, 23]
     print(len(raw_input))
     print(len(lenghts))
-    l = [x for x in range(256)] ##
+    l = [x for x in range(256)]
     current = 0
     skip_size = 0
 
