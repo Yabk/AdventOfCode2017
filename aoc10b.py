@@ -22,6 +22,7 @@ def main():
 
     print(out)
 
+
 def to_hex(l):
     s = ''
     for n in l:
