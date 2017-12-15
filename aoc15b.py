@@ -12,17 +12,10 @@ def main():
         a_current = next_a(a_current, a_factor)
         b_current = next_b(b_current, b_factor)
 
-        if is_good(a_current, b_current):
+        if (a_current & 65535) == (b_current & 65535):
             judge += 1
 
     print(judge)
-
-
-def is_good(a, b):
-    bin_a = bin(a)[2:].zfill(16)
-    bin_b = bin(b)[2:].zfill(16)
-
-    return bin_a[-16:] == bin_b[-16:]
 
 
 def next_a(current, factor):
