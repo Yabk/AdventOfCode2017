@@ -1,40 +1,46 @@
 #!/usr/bin/python3
 
 import threading
-from queue import Queue
+import time
 
 
 def main():
     judge = 0
-    qa = Queue()
-    qb = Queue()
 
-    gen_a = threading.Thread(target=generator, args=(65, 16807, 4, 5000000, qa))
-    gen_b = threading.Thread(target=generator, args=(8921, 48271, 8, 5000000, qb))
+    la = 5000000 * [0]
+    lb = 5000000 * [0]
+
+    gen_a = threading.Thread(target=generator, args=(65, 16807, 4, 5000000, la))
+    gen_b = threading.Thread(target=generator, args=(8921, 48271, 8, 5000000, lb))
+
+    start = time.time()
 
     gen_a.start()
     gen_b.start()
 
+    gen_a.join()
+    gen_b.join()
+
     for i in range(5000000):
-        a = qa.get()
-        b = qb.get()
+        a = la[i]
+        b = lb[i]
 
         if is_good(a, b):
             judge += 1
 
-    gen_a.join()
-    gen_b.join()
+    end = time.time()
 
     print(judge)
+    print(end - start)
 
 
-def generator(current, factor, mod, n, q):
+def generator(current, factor, mod, n, l):
 
     for i in range(n):
         while True:
             current = (current*factor)%2147483647
             if current%mod == 0:
-                q.put(current)
+                l[i] = current
                 break
 
 
