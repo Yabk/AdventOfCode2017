@@ -1,4 +1,4 @@
-#/usr/bin/python
+#!/usr/bin/python3
 
 from aoc10b import *
 from queue import Queue
