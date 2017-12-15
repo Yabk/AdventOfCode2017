@@ -25,7 +25,7 @@ def main():
         a = la[i]
         b = lb[i]
 
-        if is_good(a, b):
+        if (a & 65535) == (b & 65535):
             judge += 1
 
     end = time.time()
@@ -42,13 +42,6 @@ def generator(current, factor, mod, n, l):
             if current%mod == 0:
                 l[i] = current
                 break
-
-
-def is_good(a, b):
-    bin_a = bin(a)[2:].zfill(16)
-    bin_b = bin(b)[2:].zfill(16)
-
-    return bin_a[-16:] == bin_b[-16:]
 
 
 if __name__ == '__main__':
