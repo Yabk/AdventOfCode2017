@@ -17,21 +17,25 @@ def main():
         rows, columns = os.popen('stty size', 'r').read().split()
         os.system('clear')
         print('Step:{:8}'.format(step))
-        print('State: ' + state)
         print(tape_part(tape, cursor, int(columns)))
-        input()
+        print('State: ' + state)
+        print('Write: '+str(instruction[0]))
 
         tape[cursor] = instruction[0]
         if instruction[1]:
+            print('Going: Right')
             cursor += 1
             if cursor == len(tape):
                 tape.append(0)
         else:
+            print('Going: Left')
             if cursor == 0:
                 tape.insert(0, 0)
             else:
                 cursor -= 1
+        print('Next state: '+instruction[2])
         state = instruction[2]
+        input()
 
 
 def tape_part(tape, cursor, columns):
